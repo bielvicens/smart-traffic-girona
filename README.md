@@ -9,7 +9,7 @@ A reproducible research project that evaluates whether reinforcement learning ca
 
 ## Scope
 
-The initial digital twin models a compact area around Plaça Catalunya and the Eixample district of Girona. Keeping the network to approximately 4–10 intersections enables controlled, repeatable experiments before scaling the system.
+The initial digital twin models Gran Via de Jaume I and the Eixample district of Girona. The imported MVP network contains 14 traffic-light controllers; experiments will initially focus on a 4–10-intersection control subset to keep comparisons controlled and repeatable before scaling the system. See [simulation/README.md](simulation/README.md) for the network boundary and reproduction commands.
 
 ## Project status
 
@@ -62,6 +62,14 @@ sumo --version
 ```
 
 If `sumo` is not found after installation, restart the terminal so it reloads the system `PATH`.
+
+## Run the first digital twin
+
+```powershell
+.\.venv\Scripts\python.exe src\simulation\run_simulation.py
+```
+
+Use `--gui` for visual inspection. The scenario uses a synthetic, seeded demand for structural validation only; it is not calibrated to observed traffic counts.
 
 ## Reproducibility principles
 

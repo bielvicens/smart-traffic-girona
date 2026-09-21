@@ -28,7 +28,8 @@ htmlcov/
 Thumbs.db
 
 # SUMO generated output
-simulation/output/
+simulation/output/*
+!simulation/output/.gitkeep
 simulation/**/*.sumo.log
 simulation/**/*.tripinfo.xml
 simulation/**/*.queue.xml
