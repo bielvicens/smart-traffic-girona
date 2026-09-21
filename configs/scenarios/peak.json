@@ -1,0 +1,15 @@
+{
+  "name": "peak",
+  "description": "High, stationary passenger-vehicle demand representing peak conditions.",
+  "duration_seconds": 3600,
+  "seed": 42,
+  "demand_blocks": [
+    {
+      "begin_seconds": 0,
+      "end_seconds": 3600,
+      "period_seconds": 2
+    }
+  ],
+  "fringe_factor": "max",
+  "min_distance_meters": 250
+}

@@ -1,0 +1,26 @@
+{
+  "name": "incident",
+  "description": "Baseline demand with a temporary passenger-vehicle closure and rerouting.",
+  "duration_seconds": 3600,
+  "seed": 42,
+  "demand_blocks": [
+    {
+      "begin_seconds": 0,
+      "end_seconds": 3600,
+      "period_seconds": 5
+    }
+  ],
+  "fringe_factor": "max",
+  "min_distance_meters": 250,
+  "incident": {
+    "begin_seconds": 1200,
+    "end_seconds": 1800,
+    "closed_edge": "-166571453#2",
+    "notification_edges": [
+      "-166571451#1",
+      "166571453#1",
+      "61946497#0"
+    ],
+    "disallow": "passenger"
+  }
+}

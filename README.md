@@ -15,7 +15,7 @@ The initial digital twin models Gran Via de Jaume I and the Eixample district of
 
 - [x] Development environment: Python 3.11, SUMO 1.27.1, TraCI
 - [ ] Digital twin: import and validate the Girona road network
-- [ ] Traffic scenarios: normal, low, peak, variable demand, incidents
+- [x] Traffic scenarios: normal, low, peak, variable demand, incidents
 - [ ] Prediction: persistence baseline, tree model, sequence model
 - [ ] Traffic control: fixed-time, actuated, RL controller
 - [ ] Evaluation: repeated experiments, statistical summaries, plots
@@ -66,14 +66,14 @@ If `sumo` is not found after installation, restart the terminal so it reloads th
 ## Run the first digital twin
 
 ```powershell
-.\.venv\Scripts\python.exe src\simulation\run_simulation.py
+.\.venv\Scripts\python.exe src\simulation\run_simulation.py --scenario normal
 ```
 
-Use `--gui` for visual inspection. The scenario uses a synthetic, seeded demand for structural validation only; it is not calibrated to observed traffic counts.
+Available scenarios are `low`, `normal`, `peak`, `variable`, and `incident`; their JSON configurations are versioned in `configs/scenarios/`. Use `--gui` for visual inspection. The scenarios use synthetic, seeded demand for structural validation only; they are not calibrated to observed traffic counts.
 
 ## Reproducibility principles
 
-Experiments use explicit configurations, deterministic random seeds where possible, fixed baselines, repeated runs across scenarios, and versioned source networks. Generated model checkpoints and high-volume simulation outputs are excluded from Git.
+Experiments use explicit configurations, deterministic random seeds where possible, fixed baselines, repeated runs across scenarios, and versioned source networks. Generated model checkpoints, simulation outputs, and reproducible result CSVs are excluded from Git.
 
 ## License
 

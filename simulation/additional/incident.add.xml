@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <rerouter id="closure_neg_166571453_2" edges="-166571451#1 166571453#1 61946497#0">
+        <interval begin="1200" end="1800">
+            <closingReroute id="-166571453#2" disallow="passenger" />
+        </interval>
+    </rerouter>
+</additional>

@@ -8,7 +8,7 @@ The first digital twin covers a compact road network around Gran Via de Jaume I 
 - OpenStreetMap source: `data/osm/girona_gran_via_eixample.osm`
 - Network conversion retains the largest connected component usable by passenger vehicles.
 - The generated network contains 261 edges, 150 junctions, and 14 traffic-light controllers.
-- The first demand scenario lasts 1,800 seconds, uses seed `42`, and generates 360 passenger trips at a nominal period of 5 seconds.
+- Fase 2 provides five 3,600-second, seeded passenger-demand scenarios: low, normal, peak, variable, and incident.
 
 The network intentionally stays small enough for repeatable baseline and reinforcement-learning experiments. The OSM import is a structural model: OSM geometry, lane data, and signal metadata require later manual validation before the model can support real-world claims.
 
@@ -28,33 +28,35 @@ $env:SUMO_HOME = 'C:\Program Files (x86)\Eclipse\Sumo'
   --keep-edges.postload --remove-edges.isolated
 ```
 
-## Generate the initial demand
+## Generate scenario demand
+
+Scenario definitions are versioned in `configs/scenarios/`. Generate an input deterministically with:
 
 ```powershell
-$env:SUMO_HOME = 'C:\Program Files (x86)\Eclipse\Sumo'
-python "$env:SUMO_HOME\tools\randomTrips.py" `
-  -n simulation\girona_gran_via_eixample.net.xml `
-  -r simulation\girona_gran_via_eixample.rou.xml `
-  -b 0 -e 1800 -p 5 --fringe-factor max --min-distance 250 `
-  --seed 42 --validate --remove-loops
+.\.venv\Scripts\python.exe src\simulation\scenarios.py normal
 ```
 
-## Run
+Pass `--force` after changing the network or a scenario JSON. The variable scenario combines low, peak, and low demand blocks. The incident scenario additionally creates `simulation/additional/incident.add.xml`, which temporarily closes an edge and reroutes passenger vehicles.
 
-Headless validation:
+## Run a scenario
+
+Headless fixed-time baseline:
 
 ```powershell
-.\.venv\Scripts\python.exe src\simulation\run_simulation.py
+.\.venv\Scripts\python.exe src\simulation\run_simulation.py --scenario normal
 ```
 
 Visual inspection:
 
 ```powershell
-.\.venv\Scripts\python.exe src\simulation\run_simulation.py --gui
+.\.venv\Scripts\python.exe src\simulation\run_simulation.py --scenario incident --gui --no-save
 ```
+
+The runner appends locally generated metrics to `experiments/baseline/fixed_time_metrics.csv`; this reproducible output is excluded from Git. See `experiments/baseline/README.md` for the baseline table and metric definitions.
 
 ## Validation checklist
 
 1. Open the GUI run and confirm that vehicles enter, traverse, and leave the network without teleportation.
-2. Inspect every imported traffic-light controller in NetEdit before defining the fixed-time baseline.
-3. Record any changed lane, connection, or signal-plan assumption in this directory or an experiment configuration.
+2. Confirm the incident closure reroutes vehicles between simulation seconds 1,200 and 1,800.
+3. Inspect every imported traffic-light controller in NetEdit before defining the fixed-time baseline.
+4. Record any changed lane, connection, or signal-plan assumption in this directory or an experiment configuration.
