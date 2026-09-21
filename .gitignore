@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDEs and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# SUMO generated output
+simulation/output/
+simulation/**/*.sumo.log
+simulation/**/*.tripinfo.xml
+simulation/**/*.queue.xml
+simulation/**/*.emission.xml
+simulation/**/*.summary.xml
+simulation/**/*.fcd.xml
+
+# Experiment artifacts
+models/**/*.pt
+models/**/*.pth
+models/**/*.zip
+experiments/**/artifacts/
+experiments/**/runs/
