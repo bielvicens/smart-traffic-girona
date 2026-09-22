@@ -48,6 +48,9 @@ class Scenario:
     def route_file(self) -> Path:
         return SIMULATION_DIRECTORY / f"{self.name}.rou.xml"
 
+    def route_file_for_seed(self, seed: int) -> Path:
+        return SIMULATION_DIRECTORY / "generated" / f"{self.name}_seed_{seed}.rou.xml"
+
     @property
     def additional_file(self) -> Path | None:
         if self.incident is None:
@@ -174,13 +177,27 @@ def generate_scenario(name: str, force: bool = False) -> Scenario:
         raise FileNotFoundError(f"SUMO network not found: {NETWORK_FILE}")
 
     if force or not scenario_is_current(scenario):
-        generate_route_file(scenario)
+        generate_route_file(scenario, scenario.route_file, scenario.seed)
         if scenario.incident:
             generate_incident_file(scenario)
     return scenario
 
 
-def generate_route_file(scenario: Scenario) -> None:
+def generate_scenario_for_seed(name: str, seed: int, force: bool = False) -> Scenario:
+    scenario = load_scenario(name)
+    if not NETWORK_FILE.exists():
+        raise FileNotFoundError(f"SUMO network not found: {NETWORK_FILE}")
+
+    route_file = scenario.route_file_for_seed(seed)
+    newest_source = max(NETWORK_FILE.stat().st_mtime, scenario_config_path(name).stat().st_mtime)
+    if force or not route_file.exists() or route_file.stat().st_mtime < newest_source:
+        generate_route_file(scenario, route_file, seed)
+    if scenario.incident and (force or not scenario.additional_file.exists()):
+        generate_incident_file(scenario)
+    return scenario
+
+
+def generate_route_file(scenario: Scenario, output_file: Path, seed: int) -> None:
     sumo_home = find_sumo_home()
     random_trips = sumo_home / "tools" / "randomTrips.py"
 
@@ -210,7 +227,7 @@ def generate_route_file(scenario: Scenario) -> None:
                 "--min-distance",
                 str(scenario.min_distance_meters),
                 "--seed",
-                str(scenario.seed + index),
+                str(seed + index),
                 "--validate",
                 "--remove-loops",
                 "--random-departpos",
@@ -220,7 +237,7 @@ def generate_route_file(scenario: Scenario) -> None:
             subprocess.run(command, check=True, cwd=PROJECT_ROOT)
             route_files.append(route_file)
 
-        merge_route_files(route_files, scenario.route_file)
+        merge_route_files(route_files, output_file)
 
 
 def merge_route_files(route_files: list[Path], output_file: Path) -> None:
@@ -281,6 +298,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("scenario", choices=available_scenarios())
     parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="Generate a seed-specific route file under simulation/generated/.",
+    )
+    parser.add_argument(
         "--force", action="store_true", help="Regenerate existing scenario inputs."
     )
     return parser.parse_args()
@@ -288,9 +311,14 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    scenario = generate_scenario(args.scenario, force=args.force)
+    if args.seed is None:
+        scenario = generate_scenario(args.scenario, force=args.force)
+        route_file = scenario.route_file
+    else:
+        scenario = generate_scenario_for_seed(args.scenario, args.seed, force=args.force)
+        route_file = scenario.route_file_for_seed(args.seed)
     print(f"scenario={scenario.name}")
-    print(f"route_file={scenario.route_file.relative_to(PROJECT_ROOT)}")
+    print(f"route_file={route_file.relative_to(PROJECT_ROOT)}")
     if scenario.additional_file:
         print(f"additional_file={scenario.additional_file.relative_to(PROJECT_ROOT)}")
 

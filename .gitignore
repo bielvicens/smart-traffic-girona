@@ -36,6 +36,7 @@ simulation/**/*.queue.xml
 simulation/**/*.emission.xml
 simulation/**/*.summary.xml
 simulation/**/*.fcd.xml
+simulation/generated/
 
 # Experiment artifacts
 models/**/*.pt

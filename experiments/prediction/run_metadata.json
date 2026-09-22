@@ -1,0 +1,20 @@
+{
+  "target": "queue_length",
+  "metrics": [
+    "mae",
+    "rmse",
+    "r2"
+  ],
+  "models": [
+    "historical_mean",
+    "lstm",
+    "persistence",
+    "random_forest",
+    "xgboost"
+  ],
+  "horizons_minutes": [
+    5,
+    10,
+    15
+  ]
+}
