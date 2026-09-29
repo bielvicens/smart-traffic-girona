@@ -1,0 +1,26 @@
+{
+  "scenario": "normal",
+  "decision_interval_seconds": 10,
+  "episode_duration_seconds": 3600,
+  "reward": "negative_network_queue_length",
+  "min_green_seconds": 10,
+  "yellow_seconds": 3,
+  "all_red_seconds": 1,
+  "training_seeds": [42, 43, 44, 45, 46],
+  "evaluation_seeds": [47, 48, 49, 50, 51],
+  "ppo": {
+    "total_timesteps": 100000,
+    "learning_rate": 0.0003,
+    "n_steps": 1024,
+    "batch_size": 256,
+    "gamma": 0.99
+  },
+  "dqn": {
+    "total_timesteps": 100000,
+    "learning_rate": 0.0001,
+    "buffer_size": 100000,
+    "learning_starts": 5000,
+    "batch_size": 128,
+    "gamma": 0.99
+  }
+}

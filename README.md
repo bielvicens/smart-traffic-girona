@@ -17,7 +17,7 @@ The initial digital twin models Gran Via de Jaume I and the Eixample district of
 - [ ] Digital twin: import and validate the Girona road network
 - [x] Traffic scenarios: normal, low, peak, variable demand, incidents
 - [x] Prediction: persistence baseline, tree models, LSTM sequence model
-- [ ] Traffic control: fixed-time, actuated, RL controller
+- [x] Traffic control: fixed-time, actuated, RL controllers (PPO, DQN)
 - [ ] Evaluation: repeated experiments, statistical summaries, plots
 
 ## Evaluation metrics
@@ -74,6 +74,10 @@ Available scenarios are `low`, `normal`, `peak`, `variable`, and `incident`; the
 ## Traffic prediction
 
 The prediction experiment forecasts per-intersection queue length at 5, 10, and 15 minutes from 25 seeded SUMO runs. It compares persistence, historical-mean, Random Forest, XGBoost, and LSTM models. Reproduction commands and results are in [experiments/prediction/README.md](experiments/prediction/README.md).
+
+## Reinforcement learning
+
+The RL module trains centralized PPO (`MultiDiscrete`) and DQN (`Discrete(2304)`) agents to control the 14 traffic lights in the Girona network. It benchmarks against fixed-time and actuated control baselines. See [experiments/rl/README.md](experiments/rl/README.md) for local runs and [notebooks/kaggle_rl_training.ipynb](notebooks/kaggle_rl_training.ipynb) for GPU execution on Kaggle.
 
 ## Reproducibility principles
 

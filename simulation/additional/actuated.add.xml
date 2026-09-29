@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+    <tlLogic id="6510829334" type="actuated" programID="actuated" offset="0">
+        <phase duration="82" state="GGGG" minDur="10" maxDur="82" />
+        <phase duration="3" state="yyyy" />
+        <phase duration="5" state="rrrr" />
+    </tlLogic>
+    <tlLogic id="772009950" type="actuated" programID="actuated" offset="0">
+        <phase duration="82" state="G" minDur="10" maxDur="82" />
+        <phase duration="3" state="y" />
+        <phase duration="5" state="r" />
+    </tlLogic>
+    <tlLogic id="772249131" type="actuated" programID="actuated" offset="0">
+        <phase duration="82" state="GGGG" minDur="10" maxDur="82" />
+        <phase duration="3" state="yyyy" />
+        <phase duration="5" state="rrrr" />
+    </tlLogic>
+    <tlLogic id="GS_772276149" type="actuated" programID="actuated" offset="0">
+        <phase duration="27" state="rrGGgrrrGg" minDur="10" maxDur="60" />
+        <phase duration="3" state="rryyyrrryy" />
+        <phase duration="27" state="rrrrrGGGrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="rrrrryyyrr" />
+        <phase duration="27" state="GGrrrrrrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyrrrrrrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_367567689_6510829338" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="GGrrGGGGgrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyrryyyyyrrr" />
+        <phase duration="41" state="rrGgrrrrrGGg" minDur="10" maxDur="60" />
+        <phase duration="3" state="rryyrrrrryyy" />
+        <phase duration="1" state="rrrrrrrrrrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_368825355_772192674_9246233634" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="GGGgrrrGG" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyyyrrryy" />
+        <phase duration="41" state="rrrrGGGrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="rrrryyyrr" />
+        <phase duration="1" state="rrrrrrrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_370330726_6544892748_772027151" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="GGrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyrr" />
+        <phase duration="42" state="rrGG" minDur="10" maxDur="60" />
+        <phase duration="3" state="rryy" />
+    </tlLogic>
+    <tlLogic id="cluster_482350926_6510829336_772206492" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="rrrGGgGGg" minDur="10" maxDur="60" />
+        <phase duration="3" state="rrryyyyyy" />
+        <phase duration="42" state="GGGrrrrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyyrrrrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_4961905688_6510829310_771983339_772054674_#2more" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="rrrrGggGGg" minDur="10" maxDur="60" />
+        <phase duration="3" state="rrrryyyyyy" />
+        <phase duration="41" state="GGGGrrrrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyyyrrrrrr" />
+        <phase duration="1" state="rrrrrrrrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_6510829335_772038986" type="actuated" programID="actuated" offset="0">
+        <phase duration="78" state="GGGggGGgg" minDur="10" maxDur="78" />
+        <phase duration="3" state="yyyggyygg" minDur="3" maxDur="60" />
+        <phase duration="6" state="rrrGGrrGG" minDur="6" maxDur="60" />
+        <phase duration="3" state="rrryyrryy" />
+    </tlLogic>
+    <tlLogic id="cluster_771987417_772142429_772237953_8821814562" type="actuated" programID="actuated" offset="0">
+        <phase duration="82" state="GGggGGGg" minDur="10" maxDur="82" />
+        <phase duration="3" state="yyyyyyyy" />
+        <phase duration="5" state="rrrrrrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_772070536_772172281" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="GGgrrGGg" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyyrryyy" />
+        <phase duration="42" state="rrrGGrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="rrryyrrr" />
+    </tlLogic>
+    <tlLogic id="cluster_772156519_772183645" type="actuated" programID="actuated" offset="0">
+        <phase duration="42" state="GGgGGGrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="yyyyyyrrr" />
+        <phase duration="42" state="rrrrrrGGG" minDur="10" maxDur="60" />
+        <phase duration="3" state="rrrrrryyy" />
+    </tlLogic>
+    <tlLogic id="joinedS_3841825190_cluster_367567700_772275036" type="actuated" programID="actuated" offset="0">
+        <phase duration="27" state="GGGgrrGGgrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="Gyyyrryyyrr" minDur="3" maxDur="60" />
+        <phase duration="27" state="GrrrGGrrrrr" minDur="10" maxDur="60" />
+        <phase duration="3" state="Grrryyrrrrr" minDur="3" maxDur="60" />
+        <phase duration="27" state="GrrrrrrrrGG" minDur="10" maxDur="60" />
+        <phase duration="3" state="Grrrrrrrryy" minDur="3" maxDur="60" />
+    </tlLogic>
+</additional>
