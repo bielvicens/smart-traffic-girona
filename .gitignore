@@ -39,8 +39,6 @@ simulation/**/*.fcd.xml
 simulation/generated/
 
 # Experiment artifacts
-models/**/*.pt
-models/**/*.pth
-models/**/*.zip
+models/**
 experiments/**/artifacts/
 experiments/**/runs/
