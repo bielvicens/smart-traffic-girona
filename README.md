@@ -14,11 +14,11 @@ The initial digital twin models Gran Via de Jaume I and the Eixample district of
 ## Project status
 
 - [x] Development environment: Python 3.11, SUMO 1.27.1, TraCI
-- [ ] Digital twin: import and validate the Girona road network
+- [x] Digital twin: import and validate the Girona road network
 - [x] Traffic scenarios: normal, low, peak, variable demand, incidents
 - [x] Prediction: persistence baseline, tree models, LSTM sequence model
 - [x] Traffic control: fixed-time, actuated, RL controllers (PPO, DQN)
-- [ ] Evaluation: repeated experiments, statistical summaries, plots
+- [x] Evaluation: 100 held-out controller runs, paired seed analysis, tables, and plots
 
 ## Evaluation metrics
 
@@ -77,11 +77,11 @@ The prediction experiment forecasts per-intersection queue length at 5, 10, and 
 
 ## Reinforcement learning
 
-The RL module trains centralized PPO (`MultiDiscrete`) and DQN (`Discrete(2304)`) agents to control the 14 traffic lights in the Girona network. It benchmarks against fixed-time and actuated control baselines. See [experiments/rl/README.md](experiments/rl/README.md) for local runs and [notebooks/kaggle_rl_training.ipynb](notebooks/kaggle_rl_training.ipynb) for GPU execution on Kaggle.
+The RL module trains centralized PPO (`MultiDiscrete`) and DQN (`Discrete(2304)`) agents to control the 14 traffic lights in the Girona network. A 100-run held-out evaluation finds that DQN and PPO reduce mean waiting time by 8.79% and 5.98% relative to fixed-time control, while SUMO actuated control achieves a 63.30% reduction. See [experiments/rl/README.md](experiments/rl/README.md), [experiments/evaluation/](experiments/evaluation/), and [report/README.md](report/README.md) for methodology and results. Use [notebooks/kaggle_rl_training.ipynb](notebooks/kaggle_rl_training.ipynb) for compute-intensive training and evaluation.
 
 ## Reproducibility principles
 
-Experiments use explicit configurations, deterministic random seeds where possible, fixed baselines, repeated runs across scenarios, and versioned source networks. Generated model checkpoints, simulation outputs, and reproducible result CSVs are excluded from Git.
+Experiments use explicit configurations, deterministic random seeds where possible, fixed baselines, repeated runs across scenarios, and versioned source networks. Compute-intensive RL training and full controller evaluations run in Kaggle; local execution is reserved for smoke tests, static analysis, and post-processing. Versioned experiment outputs support inspection without requiring expensive reruns.
 
 ## License
 

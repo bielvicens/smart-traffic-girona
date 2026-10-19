@@ -40,6 +40,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model-directory", type=Path, default=DEFAULT_MODEL_DIRECTORY)
     parser.add_argument("--results-file", type=Path, default=DEFAULT_RESULTS_FILE)
     parser.add_argument("--plot-file", type=Path, default=DEFAULT_PLOT_FILE)
+    parser.add_argument("--append", action="store_true", help="Append to results file instead of overwriting.")
     return parser.parse_args()
 
 
@@ -74,7 +75,7 @@ def rl_callback(model: Any, normalized_environment: Any) -> Any:
     def callback(connection: Any) -> None:
         nonlocal observation
         raw_environment = normalized_environment.venv.envs[0].unwrapped
-        if raw_environment._traci is None:
+        if raw_environment._traci is not connection:
             raw_environment.attach_connection(connection)
         raw_observation = raw_environment._observation()
         observation = normalized_environment.normalize_obs(raw_observation[np.newaxis, :])
@@ -146,7 +147,7 @@ def main() -> None:
     config = load_config(args.config)
     scenarios = args.scenarios or [config["scenario"]]
     seeds = args.seeds or config["evaluation_seeds"]
-    if args.results_file.exists():
+    if not args.append and args.results_file.exists():
         args.results_file.unlink()
     all_rows = []
     actuated_file = generate_actuated_programs()

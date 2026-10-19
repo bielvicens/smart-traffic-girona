@@ -1,0 +1,16 @@
+scenario,controller,waiting_time_reduction_pct,travel_time_reduction_pct,queue_reduction_pct
+incident,actuated,64.86,10.84,64.76
+incident,dqn,10.97,1.54,16.68
+incident,ppo,7.23,1.14,12.41
+low,actuated,67.56,10.79,67.06
+low,dqn,7.3,0.79,11.25
+low,ppo,13.02,2.11,17.08
+normal,actuated,65.49,10.45,65.36
+normal,dqn,8.5,0.91,14.57
+normal,ppo,16.27,2.61,22.22
+peak,actuated,58.37,10.51,58.6
+peak,dqn,10.13,1.24,17.28
+peak,ppo,-6.27,-1.61,-1.05
+variable,actuated,61.2,10.71,61.47
+variable,dqn,6.9,0.47,16.18
+variable,ppo,2.06,-0.09,9.81

@@ -1,0 +1,16 @@
+scenario,controller,mean_waiting_time_reduction_seconds,wilcoxon_statistic,p_value_one_sided
+incident,actuated,19.85,15.0,0.0312
+incident,dqn,3.36,15.0,0.0312
+incident,ppo,2.21,12.0,0.1562
+low,actuated,19.21,15.0,0.0312
+low,dqn,2.08,14.0,0.0625
+low,ppo,3.7,14.0,0.0625
+normal,actuated,19.04,15.0,0.0312
+normal,dqn,2.47,15.0,0.0312
+normal,ppo,4.73,14.0,0.0625
+peak,actuated,19.59,15.0,0.0312
+peak,dqn,3.4,15.0,0.0312
+peak,ppo,-2.1,4.0,0.8438
+variable,actuated,19.69,15.0,0.0312
+variable,dqn,2.22,15.0,0.0312
+variable,ppo,0.66,9.0,0.4062

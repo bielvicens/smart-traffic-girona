@@ -7,6 +7,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.stats import wilcoxon
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INPUT = PROJECT_ROOT / "experiments" / "rl" / "controller_metrics.csv"
@@ -89,6 +90,33 @@ def generate_improvement_table(df: pd.DataFrame, output_dir: Path) -> pd.DataFra
     return imp_df
 
 
+def generate_paired_significance_table(df: pd.DataFrame, output_dir: Path) -> pd.DataFrame:
+    fixed_time = df.loc[df["controller"].eq("fixed_time")].set_index(["scenario", "seed"])
+    records = []
+    for scenario in sorted(df["scenario"].unique()):
+        for controller in sorted(set(df["controller"]) - {"fixed_time"}):
+            candidate = df.loc[
+                df["scenario"].eq(scenario) & df["controller"].eq(controller)
+            ].set_index(["scenario", "seed"])
+            improvement = (
+                fixed_time.loc[candidate.index, "average_waiting_time_seconds"]
+                - candidate["average_waiting_time_seconds"]
+            )
+            statistic, p_value = wilcoxon(improvement, alternative="greater", method="auto")
+            records.append(
+                {
+                    "scenario": scenario,
+                    "controller": controller,
+                    "mean_waiting_time_reduction_seconds": round(float(improvement.mean()), 2),
+                    "wilcoxon_statistic": round(float(statistic), 2),
+                    "p_value_one_sided": round(float(p_value), 4),
+                }
+            )
+    significance = pd.DataFrame(records)
+    significance.to_csv(output_dir / "paired_wilcoxon_waiting_time.csv", index=False)
+    return significance
+
+
 def plot_comparison_by_scenario(df: pd.DataFrame, output_dir: Path) -> None:
     scenarios = sorted(df["scenario"].unique())
     controllers = sorted(df["controller"].unique())
@@ -153,6 +181,7 @@ def main() -> None:
 
     generate_summary_table(df, args.output_dir)
     generate_improvement_table(df, args.output_dir)
+    generate_paired_significance_table(df, args.output_dir)
     plot_comparison_by_scenario(df, args.output_dir)
     plot_boxplots(df, args.output_dir)
 

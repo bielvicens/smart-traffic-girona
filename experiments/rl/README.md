@@ -34,13 +34,31 @@ This module implements a centralized traffic-light control environment on the Gi
 
 ### 3. Evaluation
 
+The full evaluation is compute-intensive and should run in Kaggle:
+
 ```powershell
-.\.venv\Scripts\python.exe src\reinforcement_learning\evaluate_rl.py --controllers fixed_time actuated ppo dqn --seeds 47 48 49 50 51
+.\.venv\Scripts\python.exe src\reinforcement_learning\evaluate_rl.py `
+  --controllers fixed_time actuated ppo dqn `
+  --scenarios low normal peak variable incident `
+  --seeds 47 48 49 50 51
 ```
 
-## Running full training on Kaggle
+For resumable local debugging, evaluate a missing controller with `--append`; this preserves existing rows:
 
-Full training uses `notebooks/kaggle_rl_training.ipynb`:
+```powershell
+.\.venv\Scripts\python.exe src\reinforcement_learning\evaluate_rl.py `
+  --controllers ppo `
+  --scenarios incident `
+  --seeds 47 48 49 50 51 `
+  --append
+```
+
+## Running full training and evaluation on Kaggle
+
+Full training and the 100-run controller evaluation use `notebooks/kaggle_rl_training.ipynb`:
 1. Push the repo to GitHub or upload it as a Kaggle dataset.
 2. Enable GPU acceleration (T4 x2 or P100) in the Kaggle notebook settings.
-3. Run the notebook to install SUMO, train PPO and DQN for 100,000 timesteps, and evaluate on evaluation seeds (`47`–`51`).
+3. Run the notebook to install SUMO, train PPO and DQN for 100,000 timesteps, and evaluate the four controllers on held-out seeds (`47`–`51`).
+4. Download `experiments/rl/controller_metrics.csv` for local post-processing.
+
+The final 100-run metrics and derived figures/tables are versioned under `experiments/rl/` and `experiments/evaluation/`. See [`report/README.md`](../../report/README.md) for the research analysis.
